@@ -9,6 +9,7 @@ from django.core.urlresolvers import reverse
 from django.contrib.auth.decorators import login_required
 from recommender.util.recommendation import recommender
 from django.core.cache import cache
+from roommate_recommend.wsgi import model
 
 word_dic = {'M':'Male', 'F':'Female', 'B':'Both', True:'Yes', False:'No'}
 
@@ -64,7 +65,7 @@ def preference(request):
 def housing(request):
     current_user = request.user
     if request.method == 'POST':
-        model = cache.get('model_cache')
+        #model = cache.get('model_cache')
         basic_info = {}
         location_preference = {}
         roommate_preference = {}

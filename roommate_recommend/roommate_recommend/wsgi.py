@@ -19,6 +19,6 @@ os.environ.setdefault("DJANGO_SETTINGS_MODULE", "roommate_recommend.settings")
 base_path = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 path = os.path.join(base_path, 'static', 'model', 'GoogleNews-vectors-negative300.bin')
 model = word2vec_training(path)
-cache.set('model_cache', model, None)
+#cache.set('model_cache', model, None)
 
 application = get_wsgi_application()
