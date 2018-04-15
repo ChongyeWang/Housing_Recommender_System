@@ -1,0 +1,22 @@
+{% extends 'recommender/base.html' %}
+{% load staticfiles %}
+
+{% block title_block %}
+{% endblock %}
+
+{% block body_block %}
+	{% if housing_info %}
+        <h2>[Housing Information]</h2>
+        <ul>
+        {% for house in housing_info %}
+            <li>{{ house }}</li>
+        {% endfor %}
+        </ul>
+        <form action = "{% url 'housing' %}" method="post">
+            {% csrf_token %}
+            <input type="submit" name="submit" value="Like" />
+        </form>
+    {% else %}
+        <h2>There is no housing information</h2>
+    {% endif %}
+{% endblock %}

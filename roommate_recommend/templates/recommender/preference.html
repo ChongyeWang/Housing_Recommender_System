@@ -1,0 +1,21 @@
+{% extends 'recommender/base.html' %}
+{% load staticfiles %}
+
+{% block title_block %}
+    Roommate Preference
+{% endblock %}
+
+{% block body_block %}
+    <h1>Edit your roommate preference here</h1>
+    <form id="preference_form" method="post" action="{% url 'preference' %}"
+        enctype="multipart/form-data">
+
+    {% csrf_token %}
+    <!-- isplay each form -->
+    {{ preference_form.as_p }}
+    <!-- Provide a button to click to submit the form. -->
+    <input type="submit" name="submit" value="Submit" />
+    {% if edit_success %}
+        <font color="red">Edit Preference Success!</font>
+    {% endif %}
+{% endblock %}

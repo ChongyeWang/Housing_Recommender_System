@@ -1,0 +1,37 @@
+{% extends 'recommender/base.html' %}
+{% load staticfiles %}
+
+{% block title_block %}
+    Roommates
+{% endblock %}
+
+{% block body_block %}
+    <h3>Recommended Roommates</h3>
+    <h3>Your current preference</h3>
+    <table border="1">
+        <tr>
+            <td>Preferred Gender</td>
+            <td>{{ gender_prefer }}</td>
+        </tr>
+        <tr>
+            <td>Accept Smoke</td>
+            <td>{{ smoke }}</td>
+        </tr>
+        <tr>
+            <td>Accept Party</td>
+            <td>{{ party }}</td>
+        </tr>
+        <tr>
+            <td>Accept Stay up late</td>
+            <td>{{ sleep_late }}</td>
+        </tr>
+        <tr>
+            <td>Accept Pet</td>
+            <td>{{ pet }}</td>
+        </tr>
+        <tr>
+            <td>Others</td>
+            <td>{{ description }}</td>
+        </tr>
+    </table>
+{% endblock %}

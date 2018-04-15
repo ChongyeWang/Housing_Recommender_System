@@ -1,0 +1,21 @@
+{% extends 'recommender/base.html' %}
+{% load staticfiles %}
+
+{% block title_block %}
+{% endblock %}
+
+{% block body_block %}
+	<h1>Welcome Roomate Recommender!</h1>
+	<div>
+		{% if user.is_authenticated %}
+			Hello {{ user.username }}!
+		{% else %}
+			hey there partner!
+		{% endif %}
+		<br />
+		<strong>{{ boldmessage }}</strong> <br>
+		<a href="{% url 'preference' %}">Edit preference here</a> <br>
+		<a href="{% url 'roommate' %}">See who could be your roommates</a> <br>
+		<a href="{% url 'housing' %}">Browse all housing information</a>
+	</div>
+{% endblock %}
