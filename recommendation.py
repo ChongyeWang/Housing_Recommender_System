@@ -3,6 +3,7 @@ from collaborative_filtering import*
 from search import*
 import geopy.distance
 import operator
+import numpy as np
 
 
 #Basic info:
@@ -112,7 +113,7 @@ def overall_ranking(curr_user, roommate_preference, user_description_ranking, sa
         feature[3] = (roommate_preference[user]['sleep_late'] == roommate_preference[curr_user]['sleep_late'])
         feature[4] = (roommate_preference[user]['pet'] == roommate_preference[curr_user]['pet'])
         feature[5] = 1.0 / user_description_ranking[user]
-        score = feature_weight.dot(feature)
+        score = np.array(feature_weight).dot(feature)
         user_overall_score[user] = score
 
     #Convert to user_ranking format
