@@ -119,7 +119,7 @@ def overall_ranking(curr_user, roommate_preference, user_description_ranking, sa
     #Convert to user_ranking format
     user_overall_ranking = get_userSimilarityRanking(user_overall_score)
     #transfer to ranking - user
-    ranking_user = {v: k for k, v in user_overall_ranking.iteritems()}
+    ranking_user = {v: k for k, v in user_overall_ranking.items()}
     return ranking_user
 
 
