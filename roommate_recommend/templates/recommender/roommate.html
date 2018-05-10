@@ -7,6 +7,27 @@
 
 {% block body_block %}
     <h3>Recommended Roommates</h3>
+        {% if roommates %}
+            <ul>
+            {% for mate in roommates %}
+                <li>{{ mate.user.username }}</li>
+                <img src="{{ MEDIA_URL}}{{ mate.picture }}" height="70" width="70">
+                {{ mate.user.roommatepreference.description }}
+                <form action = "{% url 'roommate' %}" method="post">
+                    {% csrf_token %}
+                    <input name="mate_name" type="hidden" value="{{ mate.user.username }}">
+                    <input type="submit" name="like" value="Like" />
+                    <input type="submit" name="dislike" value="Dislike" />
+                </form>
+                <br>
+            {% endfor %}
+            </ul>
+        {% else %}
+            no recommended roommates for you now
+        {% endif %}
+        <br><br>
+        <a href="{% url 'show_like' %}">See roommates you liked before!</a>
+    <hr>
     <h3>Your current preference</h3>
     <table border="1">
         <tr>

@@ -1,5 +1,4 @@
 from recommender.util.text_training import*
-from recommender.util.collaborative_filtering import*
 from recommender.util.search import*
 import geopy.distance
 import operator
@@ -61,9 +60,11 @@ def filter_by_require(curr_user, roommate_preference, satisfied_user_list, no_di
 
 def remove_existing_users(curr_user, user_likes, user_dislikes, satisfied_user_list):
     """remove user that already exist in the user_likes and user_dislikes list"""
+    return_list = list(satisfied_user_list)
     for user in satisfied_user_list:
         if user in user_likes[curr_user] or user in user_dislikes[curr_user]:
-            satisfied_user_list.remove(user)
+            return_list.remove(user)
+    return return_list
 
 
 def get_user_cosineScore(curr_user, roommate_preference, satisfied_user_list, model):
@@ -118,7 +119,7 @@ def overall_ranking(curr_user, roommate_preference, user_description_ranking, sa
     #Convert to user_ranking format
     user_overall_ranking = get_userSimilarityRanking(user_overall_score)
     #transfer to ranking - user
-    ranking_user = {v: k for k, v in user_overall_ranking.iteritems()}
+    ranking_user = {v: k for k, v in user_overall_ranking.items()}
     return ranking_user
 
 
@@ -140,6 +141,56 @@ def combine_recommendationMethod(overall_user_ranking_result, collaborative_filt
     return result_list
 
 
+def collaborative_filtering(curr_user, roommate_preference, user_likes, feature_weight, model):
+    #the result list of users we will recommend to the current user
+    result_user_list = []
+
+    satisfied_user_list = user_likes[curr_user]
+
+    #Return if the liked list is empty
+    if not satisfied_user_list: return result_user_list
+
+    #Get the number of curr_user likes
+    num_of_liked_user = len(satisfied_user_list)
+
+    #Select the top 3 liked user based on similarity
+    user_liked_list = []
+    if num_of_liked_user == 1:
+        user_liked_list = [user for user in satisfied_user_list]
+    else:
+        #Get the cosine score
+        user_cosineScore = get_user_cosineScore(curr_user, roommate_preference, satisfied_user_list, model)
+
+        #Get the ranking of user list based on the user description
+        user_description_ranking = get_userSimilarityRanking(user_cosineScore)
+
+        #Get the overall ranking of users based on all features
+        overall_user_ranking = overall_ranking(curr_user, roommate_preference, user_description_ranking, satisfied_user_list, feature_weight)
+
+        size = len(overall_user_ranking)
+        user_liked_list = [None] * min(3, size)
+        for ranking in overall_user_ranking:
+            if ranking == 1:
+                user_liked_list[0] = overall_user_ranking[ranking]
+            elif ranking == 2:
+                user_liked_list[1] = overall_user_ranking[ranking]
+            elif ranking == 3:
+                user_liked_list[2] = overall_user_ranking[ranking]
+
+    for user_idx in range(0, len(user_liked_list)):
+        user = user_liked_list[user_idx]
+        user_list = user_likes[user]
+        size = 10 / (user_idx + 1)
+        if len(user_list) < size:
+            result_user_list.extend(user_list)
+        else:
+            for i in range(0, size):
+                result_user_list.append(user_list[i])
+
+    result_user_list = list(set(result_user_list))#remove duplicates
+    return result_user_list
+
+
 def recommender(curr_user, distance_range, roommate_preference, location_preference, user_likes, user_dislikes, \
     feature_weight, no_diff_gender, no_smoke, no_party, no_sleep_late, no_pet, model):
     """Main recommender, recommend based on content based filtering and collaborative_filtering"""
@@ -151,7 +202,7 @@ def recommender(curr_user, distance_range, roommate_preference, location_prefere
     if not satisfied_user_list: return satisfied_user_list
 
     #remove user that already exist in the user_likes and user_dislikes list
-    remove_existing_users(curr_user, user_likes, user_dislikes, satisfied_user_list)
+    satisfied_user_list = remove_existing_users(curr_user, user_likes, user_dislikes, satisfied_user_list)
 
     if not satisfied_user_list: return satisfied_user_list
 
@@ -170,7 +221,7 @@ def recommender(curr_user, distance_range, roommate_preference, location_prefere
     overall_user_ranking_result = overall_ranking(curr_user, roommate_preference, user_description_ranking, satisfied_user_list, feature_weight)
 
     '''collaborative_filtering'''
-    collaborative_filtering_result = collaborative_filtering(curr_user, roommate_preference, user_likes, feature_weight)
+    collaborative_filtering_result = collaborative_filtering(curr_user, roommate_preference, user_likes, feature_weight, model)
 
     '''combine'''
     result_recommendation_list = combine_recommendationMethod(overall_user_ranking_result, collaborative_filtering_result)
@@ -221,6 +272,6 @@ c = get_userSimilarityRanking(b)
 overall = overall_ranking('wang', a, c, satisfied_user_list, feature_weight)
 print(overall)
 '''
-if __name__ == "__main__":
-    list = collaborative_filtering('wang', a, user_likes, feature_weight)
-    print(list)
+#if __name__ == "__main__":
+    #list = collaborative_filtering('wang', a, user_likes, feature_weight)
+    #print(list)

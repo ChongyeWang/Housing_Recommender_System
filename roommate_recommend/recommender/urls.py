@@ -4,6 +4,7 @@ from recommender import views
 urlpatterns = [
     url(r'^$', views.index, name='index'),
     url(r'^roommate/$', views.roommate, name='roommate'),
+    url(r'^show_like/$', views.show_like, name='show_like'),
     url(r'^preference/$', views.preference, name='preference'),
     url(r'^register/$', views.register, name='register'),
     url(r'^login/$', views.user_login, name='login'),

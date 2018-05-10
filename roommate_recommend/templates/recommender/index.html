@@ -5,7 +5,7 @@
 {% endblock %}
 
 {% block body_block %}
-	<h1>Welcome Roomate Recommender!</h1>
+	<h1>Welcome Roommate Recommender!</h1>
 	<div>
 		{% if user.is_authenticated %}
 			Hello {{ user.username }}!
@@ -14,8 +14,9 @@
 		{% endif %}
 		<br />
 		<strong>{{ boldmessage }}</strong> <br>
-		<a href="{% url 'preference' %}">Edit preference here</a> <br>
+		<a href="{% url 'preference' %}">Edit your preference here</a> <br>
 		<a href="{% url 'roommate' %}">See who could be your roommates</a> <br>
+		<a href="{% url 'show_like' %}">See roommates you liked before!</a> <br>
 		<a href="{% url 'housing' %}">Browse all housing information</a>
 	</div>
 {% endblock %}

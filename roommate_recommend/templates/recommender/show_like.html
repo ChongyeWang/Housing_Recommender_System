@@ -1,0 +1,27 @@
+{% extends 'recommender/base.html' %}
+{% load staticfiles %}
+
+{% block title_block %}
+    Roommate liked
+{% endblock %}
+
+{% block body_block %}
+    {% if mates %}
+        <h3>Roommates you liked</h3>
+        <ul>
+            {% for mate in mates %}
+                <li>{{ mate.username }}</li>
+                <img src="{{ MEDIA_URL}}{{ mate.userprofile.picture }}" height="70" width="70">
+                {{ mate.roommatepreference.description }}
+                <form action = "{% url 'show_like' %}" method="post">
+                    {% csrf_token %}
+                    <input name="mate_name" type="hidden" value="{{ mate.username }}">
+                    <input type="submit" name="remove" value="Remove" />
+                </form>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <h3>no roommates you liked</h3>
+    {% endif %}
+
+{% endblock %}

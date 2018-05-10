@@ -12,8 +12,7 @@
         <a href="{% url 'index' %}">Return to the homepage.</a><br />
     {% else %}
         <strong>please register here!</strong><br />
-        <form id="user_form" method="post" action="{% url 'register' %}"
-            enctype="multipart/form-data">
+        <form id="user_form" method="post" enctype="multipart/form-data" action="{% url 'register' %}">
 
         {% csrf_token %}
         <!-- isplay each form -->

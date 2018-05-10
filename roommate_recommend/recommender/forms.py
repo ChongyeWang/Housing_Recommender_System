@@ -12,7 +12,7 @@ class UserProfileForm(forms.ModelForm):
 
     class Meta:
         model = UserProfile
-        fields = ('gender',)
+        fields = ('gender', 'picture')
 
 class PreferenceForm(forms.ModelForm):
     class Meta:

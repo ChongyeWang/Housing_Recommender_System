@@ -5,18 +5,33 @@
 {% endblock %}
 
 {% block body_block %}
-	{% if housing_info %}
-        <h2>[Housing Information]</h2>
+    <h4>[The house you liked]</h4>
+    {% if like_housing_list %}
         <ul>
-        {% for house in housing_info %}
-            <li>{{ house }}</li>
-        {% endfor %}
+            {% for house in like_housing_list %}
+                <h3><li>{{ house.address }}, {{ house.zipcode }}</li></h3>
+                {{ house.description }}
+                <form action = "{% url 'housing' %}" method="post">
+                    {% csrf_token %}
+                    <input name="house_id" type="hidden" value="{{ house.zid }}">
+                    <input type="submit" name="unlike" value="Unlike" />
+                </form>
+            {% endfor %}
         </ul>
-        <form action = "{% url 'housing' %}" method="post">
-            {% csrf_token %}
-            <input type="submit" name="submit" value="Like" />
-        </form>
     {% else %}
-        <h2>There is no housing information</h2>
+        <h4>you haven't liked any house yet</h4>
     {% endif %}
+    <hr>
+    <h4>[Other houses you may be interested in]</h4>
+    <ul>
+        {% for house in other_house %}
+            <h3><li>{{ house.address }}, {{ house.zipcode }}</li></h3>
+            {{ house.description }}
+            <form action = "{% url 'housing' %}" method="post">
+                {% csrf_token %}
+                <input name="house_id" type="hidden" value="{{ house.zid }}">
+                <input type="submit" name="like" value="Like" />
+            </form>
+        {% endfor %}
+    </ul>
 {% endblock %}
