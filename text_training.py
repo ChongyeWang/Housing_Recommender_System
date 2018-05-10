@@ -14,9 +14,10 @@ import re
 import json
 
 
-def word2vec_training():
+def word2vec_training(path):
     """This method train the model using pre-trained GoogleNews-vectors-negative300.bin document"""
-    model = word2vec.KeyedVectors.load_word2vec_format(os.path.join(os.path.dirname(__file__), 'GoogleNews-vectors-negative300.bin'), binary=True)
+    #os.path.join(os.path.dirname(__file__), 'GoogleNews-vectors-negative300.bin')
+    model = word2vec.KeyedVectors.load_word2vec_format(path, binary=True)
     return model
 
 
@@ -25,9 +26,8 @@ def sentence_to_list(sentence):
     return re.findall(r'\w+', sentence)
 
 
-def get_similarity(curr_sentence, target_sentence):
+def get_similarity(curr_sentence, target_sentence, model):
     """Get the similarity between two sentences using word2vec and cosine similarity"""
-    model = word2vec_training()
     curr_word_list = sentence_to_list(curr_sentence)
     target_word_list = sentence_to_list(target_sentence)
     #sum the word vector
