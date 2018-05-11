@@ -17,7 +17,7 @@ def populate_housing():
         rows = csv.reader(csvfile)
         for row in rows:
             print(index)
-            if index % 7 == 0:
+            if index % 30 == 0:
                 address = row[0]
                 city = row[1]
                 zipcode = int(row[2])

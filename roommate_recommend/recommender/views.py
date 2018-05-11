@@ -10,6 +10,7 @@ from django.core.urlresolvers import reverse
 from django.contrib.auth.decorators import login_required
 from django.core.cache import cache
 from recommender.helper import *
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 
 def index(request):
@@ -110,31 +111,29 @@ def housing(request):
             # model = cache.get('model_cache')
         elif 'like' in request.POST:
             LikeHousing.objects.create(user=current_user, house_id=house_id)
-            '''
-            recomm_list = get_recommend_list(current_user)
-            print("new recommend list: ", recomm_list)
-            for r_user in recomm_list:
-                try:
-                    r = RecommendRoomate.objects.get(user1=current_user, user2__username=r_user)
-                except:
-                    u = User.objects.get(username=r_user)
-                    RecommendRoomate.objects.create(user1=current_user, user2=u)
-            '''
+
         #curr_user, distance_range, roommate_preference, location_preference, user_likes, user_dislikes,
         #feature_weight, no_diff_gender, no_smoke, no_party, no_sleep_late, no_pet, model):
         return HttpResponseRedirect(reverse('housing'))
     else:
-        #housing_list = Housing.objects.all()
         like_housing = LikeHousing.objects.filter(user=current_user)
         like_housing_list = []
+        id_list = []
         for like in like_housing:
             like_housing_list.append(like.house)
-        other_house = []
-        #for house in housing_list:
-            #if house not in like_housing_list:
-                #other_house.append(house)
+            id_list.append(like.house.zid)
+
+        housing_list = Housing.objects.all().exclude(zid__in=id_list)
+        page = request.GET.get('page', 1)
+        paginator = Paginator(housing_list, 30)
+        try:
+            houses = paginator.page(page)
+        except PageNotAnInteger:
+            houses = paginator.page(1)
+        except EmptyPage:
+            houses = paginator.page(paginator.num_pages)
         return render(request, 'recommender/housing.html',
-                      {'other_house': other_house, 'like_housing_list':like_housing_list})
+                      {'other_house': houses, 'like_housing_list':like_housing_list})
 
 def map(request):
     housing = Housing.objects.all()

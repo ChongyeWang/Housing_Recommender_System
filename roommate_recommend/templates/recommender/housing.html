@@ -74,6 +74,27 @@
             </form>
         {% endfor %}
     </ul>
+        {% if other_house.has_other_pages %}
+          <ul class="pagination">
+            {% if other_house.has_previous %}
+              <li><a href="?page={{ users.previous_page_number }}">&laquo;</a></li>
+            {% else %}
+              <li class="disabled"><span>&laquo;</span></li>
+            {% endif %}
+            {% for i in other_house.paginator.page_range %}
+              {% if other_house.number == i %}
+                <li class="active"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
+              {% else %}
+                <li><a href="?page={{ i }}">{{ i }}</a></li>
+              {% endif %}
+            {% endfor %}
+            {% if other_house.has_next %}
+              <li><a href="?page={{ users.next_page_number }}">&raquo;</a></li>
+            {% else %}
+              <li class="disabled"><span>&raquo;</span></li>
+            {% endif %}
+          </ul>
+        {% endif %}
 
         </div>
            <div class="col-xs-7">
