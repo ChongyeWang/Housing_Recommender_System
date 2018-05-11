@@ -34,7 +34,7 @@ def populate():
         user.save()
         profile = UserProfile(gender = 'M' if random.randint(0, 1) == 1 else 'F')
         profile.user = user
-        profile.picture = pictureList[random.randint(0, len(pictureList)-1)]
+        profile.picture = 'profile_images/' + pictureList[random.randint(0, len(pictureList)-1)]
         profile.save()
         prefer = RoommatePreference()
         prefer.gender_prefer = "M" if random.randint(0, 1) == 1 else "F"
@@ -49,3 +49,4 @@ def populate():
 if __name__ == '__main__':
     print("Starting populating client...")
     populate()
+    #deleteUsers()

@@ -136,6 +136,11 @@ def housing(request):
         return render(request, 'recommender/housing.html',
                       {'other_house': other_house, 'like_housing_list':like_housing_list})
 
+def map(request):
+    housing = Housing.objects.all()
+    context_dict = {'housing': housing}
+    return render(request, 'recommender/map.html', context_dict)
+
 
 def register(request):
     registered = False

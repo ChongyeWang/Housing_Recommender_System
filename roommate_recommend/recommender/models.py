@@ -51,7 +51,7 @@ class Housing(models.Model):
     zipcode = models.IntegerField()
     latitude = models.FloatField()
     longitude = models.FloatField()
-    description = models.CharField(max_length=500)
+    #description = models.CharField(max_length=500)
 
     def __str__(self):
         return self.address

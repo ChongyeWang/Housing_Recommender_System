@@ -1,12 +1,51 @@
-{% extends 'recommender/base.html' %}
+﻿<!DOCTYPE HTML>
+
 {% load staticfiles %}
 
-{% block title_block %}
-{% endblock %}
+<html>
+	<head>
+<meta charset="utf-8">
+<title>Home</title>
+		<!--[if lte IE 8]><script src="js/html5shiv.js"></script><![endif]-->
+		<script src="{% static "js/jquery.min.js" %}"></script>
+		<script src="{% static "js/skel.min.js" %}"></script>
+		<script src="{% static "js/skel-layers.min.js" %}"></script>
+		<script src="{% static "js/init.js" %}"></script>
 
-{% block body_block %}
-	<h1>Welcome Roommate Recommender!</h1>
-	<div>
+		<link rel="stylesheet" href="{% static "css/skel.css" %}"/>
+		<link rel="stylesheet" href="{% static "css/style.css" %}" >
+		<link rel="stylesheet" href="{% static "css/style-xlarge.css" %}" />
+	</head>
+	<body id="top">
+
+
+
+		<!-- Banner -->
+
+
+
+<!-- Header -->
+			<header id="header" class="skel-layers-fixed">
+				<a id="brand" class="brand" href="{% url 'index' %}"><img src="{% static "images/Logo.png" %}" width="17%" height="auto" alt=""/></a>
+				<nav id="nav">
+					<ul>
+						<li><a href="{% url 'index' %}">Home</a></li>
+						<li><a href="{% url 'preference' %}">Preference</a></li>
+						<li><a href="{% url 'housing' %}">Housing</a></li>
+						<li><a href="{% url 'roommate' %}">Find New Roommates</a></li>
+                        <li><a href="{% url 'show_like' %}">Liked Roommates</a></li>
+                        {% if not user.is_authenticated %}
+							<li><a href="{% url 'register' %}" class="button special">Sign Up</a></li>
+							<li><a href="{% url 'login' %}" class="button special">Sign In</a></li>
+						{% else %}
+							<li><a href="{% url 'logout' %}" class="button special">Logout</a></li>
+						{% endif %}
+					</ul>
+				</nav>
+			</header>
+	<div id="banner" class="inner">
+		<h2>Welcome Roommate Recommender!</h2>
+		<p>
 		{% if user.is_authenticated %}
 			Hello {{ user.username }}!
 		{% else %}
@@ -14,9 +53,60 @@
 		{% endif %}
 		<br />
 		<strong>{{ boldmessage }}</strong> <br>
-		<a href="{% url 'preference' %}">Edit your preference here</a> <br>
-		<a href="{% url 'roommate' %}">See who could be your roommates</a> <br>
-		<a href="{% url 'show_like' %}">See roommates you liked before!</a> <br>
-		<a href="{% url 'housing' %}">Browse all housing information</a>
+		</p>
+
 	</div>
-{% endblock %}
+
+		<!-- One -->
+
+		<!-- Footer -->
+			<footer id="footer">
+				<div class="container">
+					<div class="row double">
+						<div class="6u">
+							<div class="row collapse-at-2">
+							<div class="6u">
+									<h3>LEAM LAB</h3>
+									<ul class="alt">
+										<li><a href="http://portal.leam.illinois.edu/#WhatIsLeam" target="_blank">About</a></li>
+										<li><a href="http://www.leam.illinois.edu" target="_blank">Website</a></li>
+									</ul>
+								</div>
+
+								<div class="6u">
+									<h3>Contact as</h3>
+									<ul class="alt">
+										<li>Building Research Council</li>
+										<li>1 St Marys Road</li>
+                                        <li>Champaign, IL 61820</li>
+                                        <li><strong>Phone: </strong>217.333.1911</li>
+                                        <li><strong>Email: </strong>hpan8[at]illinois.edu</li>
+									</ul>
+								</div>
+							</div>
+						</div>
+						<div class="6u">
+							<img src="../../../../../LEAM Code/LEAM website/Website 2017/Interfacewebsite_Springfield/images/logo2.png" width="auto" height="80" alt=""/>
+							<p>LEAM serves as a tool to project a cities' future development potential using map data. The model is used to analyze and visualize the influence of various conditions on future residential and commercial growth. LEAM results have been used by cities to make more informed planning decisions.</p>
+							<!--<ul class="icons">
+								<li><a href="#" class="icon fa-twitter"><span class="label">Twitter</span></a></li>
+								<li><a href="#" class="icon fa-facebook"><span class="label">Facebook</span></a></li>
+								<li><a href="#" class="icon fa-instagram"><span class="label">Instagram</span></a></li>
+								<li><a href="#" class="icon fa-linkedin"><span class="label">LinkedIn</span></a></li>
+								<!--<li><a href="#" class="icon fa-pinterest"><span class="label">Pinterest</span></a></li>
+							</ul>
+                            -->
+						</div>
+					</div>
+					<ul class="copyright">
+						<li>&copy; Copyright © 2016 University of Illinois Department of Urban and Regional Planning and Department of Landscape Architecture LEAM TEAM</li>
+                        <!--
+						<li>Design: <a href="http://templated.co">TEMPLATED</a></li>
+						<li>Images: <a href="http://unsplash.com">Unsplash</a></li>
+                        -->
+					</ul>
+				</div>
+			</footer>
+
+	</body>
+</html>

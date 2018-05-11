@@ -1,0 +1,50 @@
+{% extends 'recommender/base.html' %}
+{% load staticfiles %}
+
+{% block title_block %}Housing Map{% endblock %}
+
+{% block head_block %}
+    <meta name="viewport" content="initial-scale=1.0">
+    <meta charset="utf-8">
+    <style>
+      #map {
+        height: 100%;
+      }
+      html, body {
+        height: 100%;
+        margin: 17px;
+        padding: 0;
+      }
+    </style>
+{% endblock %}
+
+{% block map_block %}
+    <div id="map"></div>
+    <script>
+      var map;
+      function initMap() {
+        map = new google.maps.Map(document.getElementById('map'), {
+          center: {lat: 40.113829, lng: -88.224911},
+          zoom: 14
+        });
+        {% for house in housing %}
+            latlng = new google.maps.LatLng({{ house.latitude }}, {{ house.longitude }});
+            marker = new google.maps.Marker({
+                position: latlng,
+                map: map,
+                title:"{{ housing.address }}"
+            });
+            marker.setMap(map);
+            infowindow = new google.maps.InfoWindow({content: "{{ house.address }}, {{ house.latitude }}, {{ house.longitude }}" });
+            with ({ info: infowindow, marker: marker}) {
+                google.maps.event.addListener(marker, 'click', function(){
+                    info.open(map, marker);
+                });
+            }
+        {% endfor %}
+      }
+
+    </script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDLfgkbrfNN8RbFPhROiLfa-tfdEciyFsI&callback=initMap" async defer></script>
+
+{% endblock %}
