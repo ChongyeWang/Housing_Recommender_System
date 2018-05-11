@@ -291,7 +291,6 @@
 		padding: 0.75em 1em;
 	}
 
-	input[type="checkbox"],
 	input[type="radio"] {
 		-moz-appearance: none;
 		-webkit-appearance: none;
@@ -306,7 +305,6 @@
 		z-index: -1;
 	}
 
-		input[type="checkbox"] + label,
 		input[type="radio"] + label {
 			text-decoration: none;
 			color: #555f66;
@@ -319,7 +317,6 @@
 			position: relative;
 		}
 
-			input[type="checkbox"] + label:before,
 			input[type="radio"] + label:before {
 				-moz-osx-font-smoothing: grayscale;
 				-webkit-font-smoothing: antialiased;
@@ -329,7 +326,6 @@
 				text-transform: none !important;
 			}
 
-			input[type="checkbox"] + label:before,
 			input[type="radio"] + label:before {
 				background: rgba(144, 144, 144, 0.075);
 				border-radius: 6px;
@@ -345,7 +341,6 @@
 				width: 1.65em;
 			}
 
-		input[type="checkbox"]:checked + label:before,
 		input[type="radio"]:checked + label:before {
 			background: #192024;
 			border-color: #192024;
@@ -353,15 +348,11 @@
 			content: '\f00c';
 		}
 
-		input[type="checkbox"]:focus + label:before,
 		input[type="radio"]:focus + label:before {
 			border-color: #629DD1;
 			box-shadow: 0 0 0 1px #629DD1;
 		}
 
-	input[type="checkbox"] + label:before {
-		border-radius: 6px;
-	}
 
 	input[type="radio"] + label:before {
 		border-radius: 100%;
@@ -885,7 +876,7 @@
 		background: #fff;
 		color: #555f66;
 		cursor: default;
-		height: 3.9em;
+		height: 4.8em;
 		left: 0;
 		line-height: 3em;
 		position: fixed;
@@ -930,7 +921,7 @@
 				#header nav > ul > li {
 					border-radius: 6px;
 					display: inline-block;
-					margin-left: 1.25em;
+					margin-left: 1.0em;
 					padding-left: 0;
 				}
 
@@ -943,7 +934,7 @@
 						color: #555f66;
 						display: inline-block;
 						text-decoration: none;
-						font-size:1.2em;
+						font-size:1.3em;
 					}
 
 						#header nav > ul > li a:hover {
@@ -1051,6 +1042,9 @@
 				color: #ffffff;
 				text-decoration: none;
 			}
+#house.like{
+	margin-top:5%;
+}
 #house.like h1{
 	color:coral;
 	font-size: 1.4em;
@@ -1066,7 +1060,44 @@
 	padding: 0;
 	
 }
+#roommate.room {
+	margin-top:5%;
+}
+#roommate.room h3{
+	color:coral;
+	font-size: 1.4em;
+	line-height: 1em;
+    margin: 0 0 0.5em 0;
+	padding: 0;
+}
+
+#roommate.room p{
+	font-size: 1.15em;
+	line-height: 1em;
+    margin: 0 0 0.5em 0;
+	padding: 0;
+	
+}
+#showlike.show{
+	margin-top: 5%;
+}
+#showlike.show h3{
+	color:coral;
+	font-size: 1.4em;
+	line-height: 1em;
+    margin: 0 0 0.5em 0;
+	padding: 0;
+}
+
+#showlike.show p{
+	font-size: 1.15em;
+	line-height: 1em;
+    margin: 0 0 0.5em 0;
+	padding: 0;
+	
+}
 #login.log {
+    margin-top:3%;
 	width:60%;
 	background-color:whitesmoke;
 	padding:1.5em;
@@ -1087,6 +1118,7 @@
 	
 }
 #preference.prefer{
+    margin-top:3%;
 	width:60%;
 	background-color:whitesmoke;
 	padding:1.5em;
@@ -1099,8 +1131,14 @@
     margin: 0 0 0.5em 0;
 	padding: 0;
 }
-
+#preference.prefer p{
+	font-size: 1.15em;
+	line-height: 1em;
+    margin: 0 0 0.5em 0;
+	padding: 0;
+}
 #register.regis{
+    margin-top:3%;
 	width:60%;
 	background-color:whitesmoke;
 	padding:1.5em;

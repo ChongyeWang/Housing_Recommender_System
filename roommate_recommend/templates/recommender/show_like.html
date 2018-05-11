@@ -20,9 +20,8 @@
 <body>
 
 
-    {% if mates %}
-         <header id="header" class="skel-layers-fixed">
-		<a id="brand" class="brand" href="index.html"><img src="images/Logo.png" width="17%" height="auto" alt=""/></a>
+    <header id="header" class="skel-layers-fixed">
+		<a id="brand" class="brand" href="index.html"><img src="{% static "images/Logo.png" %}" width="17%" height="auto" alt=""/></a>
 		<nav id="nav">
 			<ul>
 						<li><a href="{% url 'index' %}">Home</a></li>
@@ -40,6 +39,7 @@
 				</nav>
 		</header>
        <div id="showlike" class="container show">
+    {% if mates %}
         <h3>Roommates you liked</h3>
         <ul>
             {% for mate in mates %}
@@ -66,8 +66,8 @@
 							<div class="6u">
 									<h3>ROOMATE RECOMMENDER</h3>
 									<ul class="alt">
-										<li><a href="index.html" target="_blank">About</a></li>
-										<li><a href="index.html" target="_blank">Website</a></li>
+										<li><a href="#" target="_blank">About</a></li>
+										<li><a href="#" target="_blank">Website</a></li>
 									</ul>
 								</div>
 
@@ -84,7 +84,7 @@
 							</div>
 						</div>
 						<div class="6u">
-							<img src="images/logo.png" width="auto" height="80" alt=""/>
+							<img src="{% static "images/logo.png" %}" width="auto" height="80" alt=""/>
 							<p>ROOMMATE RECOMMENDER aims to recommend potiential roommates for users based on their preferred living locations, life styles and roommate preferences.</p>
 						</div>
 					</div>

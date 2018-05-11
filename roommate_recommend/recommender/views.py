@@ -13,7 +13,7 @@ from recommender.helper import *
 
 
 def index(request):
-    context_dict = {'boldmessage': "you can search for housing & get roommates we recommend to you!"}
+    context_dict = {'boldmessage': "you can browse housing info & get roommates we recommend to you!"}
     return render(request, 'recommender/index.html', context=context_dict)
 
 @login_required
@@ -48,7 +48,7 @@ def roommate(request):
             context_dict['party'] = word_dic[preference.party]
             context_dict['sleep_late'] = word_dic[preference.sleep_late]
             context_dict['pet'] = word_dic[preference.pet]
-            context_dict['description'] = word_dic[preference.description]
+            context_dict['description'] = preference.description
         except:
             pass
         #r = RecommendRoomate.objects.filter(user1=current_user)
@@ -124,15 +124,15 @@ def housing(request):
         #feature_weight, no_diff_gender, no_smoke, no_party, no_sleep_late, no_pet, model):
         return HttpResponseRedirect(reverse('housing'))
     else:
-        housing_list = Housing.objects.all()
+        #housing_list = Housing.objects.all()
         like_housing = LikeHousing.objects.filter(user=current_user)
         like_housing_list = []
         for like in like_housing:
             like_housing_list.append(like.house)
         other_house = []
-        for house in housing_list:
-            if house not in like_housing_list:
-                other_house.append(house)
+        #for house in housing_list:
+            #if house not in like_housing_list:
+                #other_house.append(house)
         return render(request, 'recommender/housing.html',
                       {'other_house': other_house, 'like_housing_list':like_housing_list})
 
