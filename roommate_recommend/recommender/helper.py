@@ -41,8 +41,8 @@ def get_recommend_list(current_user):
                 user_likes[user_name].append(r.user2.username)
             else:
                 user_dislikes[user_name].append(r.user2.username)
-        print(user_name+ 'like: ' + str(user_likes[user_name]))
-        print(user_name + 'dislike: ' + str(user_dislikes[user_name]))
+        #print(user_name+ 'like: ' + str(user_likes[user_name]))
+        #print(user_name + 'dislike: ' + str(user_dislikes[user_name]))
     feature_weight = [0.6, 0.1, 0.1, 0.1, 0.05, 0.05]
     recomm_list = recommender(current_user.username, 1000, roommate_preference, location_preference,
                               user_likes, user_dislikes, feature_weight,

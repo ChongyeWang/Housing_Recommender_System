@@ -105,16 +105,29 @@ def preference(request):
 def housing(request):
     current_user = request.user
     if request.method == 'POST':
-        house_id = request.POST.get('house_id')
-        if 'unlike' in request.POST:
-            LikeHousing.objects.get(user=current_user, house_id=house_id).delete()
-            # model = cache.get('model_cache')
-        elif 'like' in request.POST:
-            LikeHousing.objects.create(user=current_user, house_id=house_id)
+        if request.POST.get('zipcode') != None:
+            zipCode = request.POST.get('zipcode')
+            like_housing = LikeHousing.objects.filter(user=current_user)
+            like_housing_list = []
+            id_list = []
+            for like in like_housing:
+                like_housing_list.append(like.house)
+                id_list.append(like.house.zid)
 
-        #curr_user, distance_range, roommate_preference, location_preference, user_likes, user_dislikes,
-        #feature_weight, no_diff_gender, no_smoke, no_party, no_sleep_late, no_pet, model):
-        return HttpResponseRedirect(reverse('housing'))
+            housing_list = Housing.objects.filter(zipcode__startswith=zipCode).exclude(zid__in=id_list)
+            return render(request, 'recommender/housing.html',
+                          {'other_house': housing_list, 'like_housing_list': like_housing_list})
+        else:
+            house_id = request.POST.get('house_id')
+            if 'unlike' in request.POST:
+                LikeHousing.objects.get(user=current_user, house_id=house_id).delete()
+                # model = cache.get('model_cache')
+            elif 'like' in request.POST:
+                LikeHousing.objects.create(user=current_user, house_id=house_id)
+
+            #curr_user, distance_range, roommate_preference, location_preference, user_likes, user_dislikes,
+            #feature_weight, no_diff_gender, no_smoke, no_party, no_sleep_late, no_pet, model):
+            return HttpResponseRedirect(reverse('housing'))
     else:
         like_housing = LikeHousing.objects.filter(user=current_user)
         like_housing_list = []
