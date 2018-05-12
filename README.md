@@ -1,52 +1,45 @@
-# CS410_Group_Project
+# [CS410_Group_Project] Campus Roommate Recommender
 
-basic_info = {name : {gender : male, email : a1@illinois.edu, phone : 217}}
-
-location_preference = {name : {lon : 80, lat : 80}}
-
-roommate_preference = {name : {preference_gender : Male, smoke : No, party: No, sleep_late: No, pet: No, self_description : 'xxxxxxxxxxxxxx'}}
+### Si Chen(sichen12), Chongye Wang (chongye2), Wen-Chen Lo (wclo2)
 
 
-like_list = {name : [name, name, name, name], name2 : [name, name, name, name]}
+## Description: 
+Our project is a roommates recommendation system. Through our system, students can browse housing information in Champaign/Urbana which they can like or dislike. In addition, after filling out their roommates preference, students are able to look for recommended roommates based on their preference and needs for locations, all can be done easily through our web interface.
 
-dislike_list = {name : [name, name, name, name], name2 :  [name, name, name, name]}
+## Algorithm
+### Recommendation Algorithm
+We use both the combination of content based filtering and collaborative filtering.
 
-feature_weight = [weight of feature1, weight of feature2, weight of feature3…….]
+Each user will be able to submit a form when they register. The form includes the prefered gender preference, whether the user smoke, whether the user likes party, whether the user sleeps late, whether the likes pet and a self description. Initially the user can select their target location for dorms so users that are not in the range will not be recommended to the user. For analyzing text similarity based on the description of the user, we use  word2vec - google pre-trained document GoogleNews-vectors-negative300.bin and get the similarity score using cosine function and sklearn library. For the content based filtering, from the information the user provided when they register, we can recommend potential roommate to the user after ranking other users based on their similarity. Also, each user will have a like list and dislike list, so they can choose if the users recommended to them is appropriate or not. The unliked users will not appear next time they search. Also,  from the user liked list, we can apply collaborative filtering since there is a higher probability that if a user from the liked list of the current user, users from the liked list of this user might also be appropriate for the current user as well. In addition, while searching, the user can also filter the recommended list based on the requirement such as remove users that smoke. When we acquire enough data, we can update our weight vector based on the users and their liked lists using linear regression.
+### Parameters for API
+```basic_info = {name : {gender : male, email : a1@illinois.edu, phone : 217}}```
+```location_preference = {name : {lon : 80, lat : 80}}```
+```roommate_preference = {name : {preference_gender : Male, smoke : No, party: No, sleep_late: No, pet: No, self_description : 'xxxxxxxxxxxxxx'}}```
+```like_list = {name : [name, name, name, name], name2 : [name, name, name, name]}```
+```dislike_list = {name : [name, name, name, name], name2 :  [name, name, name, name]}```
+```feature_weight = [weight of feature1, weight of feature2, weight of feature3…….]```
+
+## System Architecture
 
 
+### How to deploy
 
 
+## Dataset
+The housing addresses within Urbana-Champaign City were retrieved from Champaign County GIS Consortium (<https://webstore.illinois.edu/shop/product.aspx?zpid=3194>). The addresses are displayed in US Dual Range Address style, with zipcode, longtitude and latitude. These addresses are provided to users to like/unlike.
 
 
-
-
-# Campus Roommate Recommender
-Si Chen(sichen12), Chongye Wang (chongye2), Wen-Chen Lo (wclo2)
-
-# Goal: 
-Our goal is to build a houses finding system including a houses searching engine and a roommates recommendation system. Through our system, students looking for houses will be able to find the houses that satisfy their need for locations and the recommended roommates based on theirs needs and interests.
-
-# Motivations: 
+## Motivations: 
 Many students have the problems of looking for appropriate houses and roommates, so our houses finding system provide practical uses for these kinds of students. By providing the information of house locations they prefer and requirements for roommates, users can search the houses that match their location requirements and find recommended roommates for users based on their needs and habits, therefore increasing the possibilities of finding appropriate houses and roommates.
 Initial Approach and Techniques:
-We have mainly two systems to build, namely a customized housing search engine and a roommate recommendation system. First, we will build a crawler using Zillow API to collect datasets for rental housing information nearby campus. We then build inverted indexes in order to develop the search engine. Besides, we will provide a web service so that users could register their personal profile, search and browse some rental housing, and make a list of their favorite houses. On the other hand, recommendation system will periodically generate and update a list of recommended roommates to users based on their personal profile, what houses they like, etc.
-    We will possibly implement the crawler, search engine, and recommendation system by Python. Below are the tools and techniques we will possibly use:
-MapReduce: build inverted index
-HBase: store inverted index
-Web Service: Django, a Python Web framework
-MySQL: store user profile, recommendation list, etc.
-
-# Expected Outcomes: 
+First, we collected datasets for housing information nearby campus. Then, we built a web service so that users could register their personal profile, search and browse some rental housing, and make a list of their favorite houses. On the other hand, recommendation system will periodically generate and update a list of recommended roommates to users based on their personal profile, what houses they like, etc.
+   
+## Expected Outcomes: 
 The two systems would be shown in a web interface. Users are able to choose their ideal houses on a google map window, and add to wish list. Then the interface would pop out reminder of created roommate recommendation list to users. 
-# Related Works: roommates.com
 
-# Schedule:
-3/25 - 3/31: Data cleaning and parsing. Survey recommendation algorithm.
-4/1 - 4/7: Build index and search engine. 
-4/8 - 4/14: Implementation for backend, frontend, and recommendation system.
-4/15 - 4/21: Implementation for backend, frontend, and recommendation system.
-4/22 - 4/28: System Integration.
-4/29 - 5/5: Experiment setups and experimental evaluation.
+
+
+
 
 
 
