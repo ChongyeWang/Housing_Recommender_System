@@ -29,8 +29,8 @@ Each user will be able to submit a form when they register. The form includes th
 
 ### How to deploy
 1. please install python3  and pip before deploying
-2. Install and setup MySQL
-3. Download pre-trained word2vec model from <https://drive.google.com/file/d/1dZbC1zw9RLvetsMqBlbG0G4Zzz6Bpbft/view?usp=sharing>, put it in roommate_recommend/static/model/
+2. Install and setup MySQL. Change DATABASES setting in ```roommate_recommend/roommate_recommend/settings.py```
+3. Download pre-trained word2vec model from <https://drive.google.com/file/d/1dZbC1zw9RLvetsMqBlbG0G4Zzz6Bpbft/view?usp=sharing>, put it in ```roommate_recommend/static/model/```
 4. Go to roommate_recommend directory, then ```pip install -r requirements.txt```
 5. Database migration by ```python manage.py migrate```
 6. Populate test clients by ```python populate_client.py```
