@@ -34,7 +34,7 @@ Each user will be able to submit a form when they register. The form includes th
 3. Database migration by ```python manage.py migrate```
 4. Populate test clients by ```python populate_client.py```
 5. Put dataset to database by ```python populate_house.py```
-6. Run test server by ```python manage.py runserver```
+6. Run test server by ```python manage.py runserver```, use http://[host IP]:8000/ to access web server
 7. For production deployment on Apache server, see <https://docs.djangoproject.com/en/2.0/howto/deployment/wsgi/modwsgi/>
 
 
