@@ -25,7 +25,7 @@ Each user will be able to submit a form when they register. The form includes th
 ```feature_weight = [weight of feature1, weight of feature2, weight of feature3…….]```
 
 ## System Architecture
-![image](https://github.com/ChongyeWang/CS410_Group_Project/blob/master/architecture.jpeg)
+![image](https://github.com/ChongyeWang/CS410_Group_Project/blob/master/architecture.jpg)
 
 ### How to deploy
 1. please install python3  and pip before deploying
