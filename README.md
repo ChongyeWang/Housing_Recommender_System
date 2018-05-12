@@ -25,9 +25,17 @@ Each user will be able to submit a form when they register. The form includes th
 ```feature_weight = [weight of feature1, weight of feature2, weight of feature3…….]```
 
 ## System Architecture
-
+<img style="vertical-align:middle;" src="https://drive.google.com/file/d/1ST8I22xo9ql5E6byxxuapGzJfHkgXRGb/view?usp=sharing"/>
 
 ### How to deploy
+1. please install python3  and pip before deploying
+2. Install and setup MySQL
+2. Go to roommate_recommend directory, then ```pip install -r requirements.txt```
+3. Database migration by ```python manage.py migrate```
+4. Populate test clients by ```python populate_client.py```
+5. Put dataset to database by ```python populate_house.py```
+6. Run test server by ```python manage.py runserver```
+7. For production deployment on Apache server, see <https://docs.djangoproject.com/en/2.0/howto/deployment/wsgi/modwsgi/>
 
 
 ## Dataset

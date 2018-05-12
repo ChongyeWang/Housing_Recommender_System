@@ -13,7 +13,7 @@ from recommender.models import UserProfile, RoommatePreference, Housing, LikeHou
 
 def populate_housing():
     index = 1
-    with open('/Users/wencheng/cs410/project/address.csv', newline='') as csvfile:
+    with open('./address.csv', newline='') as csvfile:
         rows = csv.reader(csvfile)
         for row in rows:
             print(index)
