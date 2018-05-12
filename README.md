@@ -47,9 +47,6 @@ The housing addresses within Urbana-Champaign City were retrieved from Champaign
 Many students have the problems of looking for appropriate houses and roommates, so our houses finding system provide practical uses for these kinds of students. By providing the information of house locations they prefer and requirements for roommates, users can search the houses that match their location requirements and find recommended roommates for users based on their needs and habits, therefore increasing the possibilities of finding appropriate houses and roommates.
 Initial Approach and Techniques:
 First, we collected datasets for housing information nearby campus. Then, we built a web service so that users could register their personal profile, search and browse some rental housing, and make a list of their favorite houses. On the other hand, recommendation system will periodically generate and update a list of recommended roommates to users based on their personal profile, what houses they like, etc.
-   
-## Expected Outcomes: 
-The two systems would be shown in a web interface. Users are able to choose their ideal houses on a google map window, and add to wish list. Then the interface would pop out reminder of created roommate recommendation list to users. 
 
 
 
