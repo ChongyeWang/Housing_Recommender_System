@@ -4,7 +4,7 @@ botocore==1.10.4
 bz2file==0.98
 certifi==2018.1.18
 chardet==3.0.4
-Django==1.11.12
+Django==1.11.23
 docutils==0.14
 gensim==3.4.0
 geographiclib==1.49
